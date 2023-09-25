@@ -535,6 +535,19 @@ impl DescCompilation {
                 false,
             );
         }
+        if let Some(logical_maximum) = spec.logical_max {
+            // Set to 0 to indicate that we've already set the default
+            // See handle_globals
+            self.logical_maximum = Some(0);
+            self.emit_item(
+                elems,
+                ItemType::Global.into(),
+                GlobalItemKind::LogicalMax.into(),
+                logical_maximum as isize,
+                false,
+                false,
+            );
+        }
 
         for name in spec.clone() {
             let f = spec.get(name.clone()).unwrap();
